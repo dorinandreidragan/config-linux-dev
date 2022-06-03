@@ -1,0 +1,5 @@
+tmux_plugins:
+  - tpm
+  - tmux-sensible
+  - tmux-resurrect
+  - tmux-yank

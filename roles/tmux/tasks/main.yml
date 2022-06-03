@@ -1,0 +1,23 @@
+---
+- block:
+  - name: Install tmux
+    apt:
+      name: tmux
+      state: present
+
+    become: true
+    become_user: root
+
+- name: Configure tmux
+  template:
+    src: templates/.tmux.conf.j2
+    dest: "{{ ansible_env.HOME }}/.tmux.conf"
+
+- name: Install plugins
+  git:
+    repo: "https://github.com/tmux-plugins/{{ item }}.git"
+    dest: "{{ ansible_env.HOME }}/.tmux/{{ item }}"
+    force: yes
+  with_items:
+    - "{{ tmux_plugins }}"
+

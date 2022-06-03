@@ -1,0 +1,24 @@
+---
+- hosts: localhost
+  vars:
+    user: ddragan
+    become: true
+    become_user: "{{ user }}"
+
+  tasks:
+    - debug:
+        msg: "{{ ansible_env.HOME }}"
+
+    - block:
+      - debug:
+          msg: "{{ ansible_env.HOME }}"
+
+      - name: test become root
+        apt:
+          name: fzf
+          state: present
+
+        become: true
+        become_user: root
+
+
