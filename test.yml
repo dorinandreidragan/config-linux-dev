@@ -7,11 +7,11 @@
 
   tasks:
     - debug:
-        msg: "{{ ansible_env.HOME }}"
+        msg: "{{ local_user_home }}"
 
     - block:
       - debug:
-          msg: "{{ ansible_env.HOME }}"
+          msg: "{{ local_user_home }}"
 
       - name: test become root
         apt:
@@ -20,5 +20,3 @@
 
         become: true
         become_user: root
-
-

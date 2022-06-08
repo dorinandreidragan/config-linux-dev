@@ -115,11 +115,6 @@ setw -g mode-keys vi
 ## set 'v' to begin selection as in Vim
 bind -T copy-mode-vi v send-keys -X begin-selection
 
-## update default binding of 'Enter' to also use copy-pipe
-#unbind -t vi-copy Enter
-#bind -t vi-copy Enter copy-pipe "reattach-to-user-namespace pbcopy"
-#bind y run 'tmux save-buffer - | reattach-to-user-namespace pbcopy '
-
 ## set copy-mode highlight colors
 set-window-option -g mode-style bg=colour25,fg=colour254
 

@@ -1,0 +1,54 @@
+---
+- name: Install and configure xrdp
+  block:
+    
+    - name: Install linux packages
+      apt:
+        name: xrdp 
+        state: present
+        update_cache: true
+
+    - name: Configure xrdp properties
+      lineinfile:
+        path: /etc/xrdp/xrdp.ini
+        regexp: "^#?{{ item.key }}=.*"
+        line: "{{ item.key }}={{ item.value }}"
+        create: true
+        state: present
+      with_dict:
+        - "{{ xrdp_properties }}"
+
+    - name: Configure xrdp port
+      lineinfile:
+        path: /etc/xrdp/xrdp.ini
+        regexp: "^#?port=3389"
+        line: "port={{ xrdp_port }}"
+
+    - name: Remove line 'test -x /etc/X11/Xsession && exec /etc/X11/Xsession'
+            from /etc/xrdp/startwm.sh
+      lineinfile:
+        path: /etc/xrdp/startwm.sh
+        regexp: "test -x /etc/X11/Xsession && exec /etc/X11/Xsession"
+        state: absent
+
+    - name: Remove line 'exec /bin/sh /etc/X11/Xsession'
+            from /etc/xrdp/startwm.sh
+      lineinfile:
+        path: /etc/xrdp/startwm.sh
+        regexp: "exec /bin/sh /etc/X11/Xsession"
+        state: absent
+
+    - name: Insert line 'i3' in /etc/xrdp/startwm.sh
+      lineinfile:
+        path: /etc/xrdp/startwm.sh
+        line: "i3"
+        state: present
+
+    - name: Start xrdp service
+      sysvinit:
+        name: xrdp
+        state: started
+        enabled: true
+
+  become: true
+  become_user: root

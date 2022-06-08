@@ -1,0 +1,6 @@
+---
+xrdp_properties:
+  xserverbpp: 128
+  max_bpp: 128
+
+xrdp_port: 3390

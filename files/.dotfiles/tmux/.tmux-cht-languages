@@ -1,4 +1,10 @@
+ansible
+cpp
+csharp
 golang
+jinja
 nodejs
+pester
+powershell
 python
 typescript

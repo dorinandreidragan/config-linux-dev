@@ -1,0 +1,42 @@
+set nocompatible
+filetype off
+set clipboard+=unnamedplus
+
+call plug#begin('~/.config/autoload')
+
+" Themes
+Plug 'tomasiser/vim-code-dark'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'lukas-reineke/indent-blankline.nvim'
+
+" CoC plugin
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Telescope
+Plug 'nvim-lua/plenary.nvim'
+Plug 'BurntSushi/ripgrep'
+Plug 'nvim-telescope/telescope.nvim'
+
+" Tree
+Plug 'kyazdani42/nvim-tree.lua'
+
+" Comments
+Plug 'tpope/vim-commentary'
+
+" Dev Icons
+Plug 'kyazdani42/nvim-web-devicons'
+
+" Github
+Plug 'github/copilot.vim'
+
+call plug#end()
+
+" nvim-tree
+lua require('nvim-tree').setup()
+
+" source custom configuration
+source {{ neovim_config_dir}}/options/sets.vim
+source {{ neovim_config_dir}}/options/theme.vim
+source {{ neovim_config_dir}}/options/lualine.vim
+source {{ neovim_config_dir}}/options/nvim-tree.vim
+source {{ neovim_config_dir}}/options/telescope.vim

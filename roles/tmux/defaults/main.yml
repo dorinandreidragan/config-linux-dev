@@ -1,5 +1,8 @@
+---
+local_user_home: "{{ lookup('env', 'HOME') }}"
+
 tmux_plugins:
-  - tpm
-  - tmux-sensible
-  - tmux-resurrect
-  - tmux-yank
+  - { name: tpm, version: v3.0.0 }
+  - { name: tmux-sensible, version: v3.0.0 }
+  - { name: tmux-resurrect, version: v4.0.0 }
+  - { name: tmux-yank, version: v2.3.0 }

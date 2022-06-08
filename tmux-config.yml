@@ -2,7 +2,7 @@
 - name: Copy tmux .dotfiles
   copy:
     dest: "{{ local_user_home }}/.dotfiles/"
-    src: files/.dotfiles/tmux 
+    src: files/.dotfiles/tmux
 
 - name: Make tmux-cht.sh executable
   file:
@@ -12,7 +12,6 @@
 - name: Set bind key for cht.sh in tmux
   lineinfile:
     path: "{{ local_user_home }}/.tmux.conf"
-    line: 'bind-key -r i run-shell "tmux neww {{ local_user_home }}/.dotfiles/tmux-cht.sh"'
+    line: 'bind-key -r i run-shell "tmux neww {{ local_user_home }}/.dotfiles/tmux/tmux-cht.sh"'
     insertafter: "# { bind-key }"
     state: present
-

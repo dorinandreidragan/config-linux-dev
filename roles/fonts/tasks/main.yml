@@ -1,0 +1,16 @@
+---
+- name: Ensure fonts directory
+  file:
+    path: "{{ local_user_home }}/.fonts"
+    state: directory
+    mode: u+rw
+
+- name: Download and extract Hack fonts
+  unarchive:
+    src: "{{ item }}" 
+    dest: "{{ local_user_home }}/.fonts/"
+    remote_src: true
+    mode: u+rw
+  with_items:
+    - "{{ font_archives }}"
+  notify: Update font cache

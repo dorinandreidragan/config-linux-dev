@@ -1,0 +1,21 @@
+---
+- name: Install packages
+  block:
+  - name: Install i3
+    apt:
+      name: i3
+      state: present
+
+    become: true
+    become_user: root
+
+- name: Make sure "{{ local_user_home }}/.config/i3" exists
+  file:
+    path: "{{ local_user_home }}/.config/i3"
+    state: directory
+
+- name: Configure i3
+  template:
+    src: templates/config.j2
+    dest: "{{ local_user_home }}/.config/i3/config"
+    mode: u+rw
