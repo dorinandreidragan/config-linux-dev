@@ -3,7 +3,7 @@
   gather_facts: true
   vars:
     - shell_profile: .zshrc
-    - local_user_home: "/home/ddragan"
+    - local_user_home: "{{ lookup('env', 'HOME') }}"
 
   pre_tasks:
     - name: Make sure 'PATH=$PATH:/home/$USER/.local/bin'
