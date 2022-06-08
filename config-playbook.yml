@@ -5,42 +5,42 @@
     - shell_profile: .zshrc
     - local_user_home: "/home/ddragan"
 
-  # pre_tasks:
-    # - name: Make sure 'PATH=$PATH:/home/$USER/.local/bin'
-    #         is added to the shell profile
-    #   lineinfile:
-    #     path: "{{ local_user_home }}/{{ shell_profile }}"
-    #     line: "export PATH=$PATH:/home/$USER/.local/bin"
-    #     create: true
-    #     mode: u+rw
+  pre_tasks:
+    - name: Make sure 'PATH=$PATH:/home/$USER/.local/bin'
+            is added to the shell profile
+      lineinfile:
+        path: "{{ local_user_home }}/{{ shell_profile }}"
+        line: "export PATH=$PATH:/home/$USER/.local/bin"
+        create: true
+        mode: u+rw
 
-    # - name: Install Ansible tools with pip
-    #   pip:
-    #     name: "{{ item }}"
-    #   with_items:
-    #     - yamllint
-    #     - ansible-lint
-    #     - molecule
+    - name: Install Ansible tools with pip
+      pip:
+        name: "{{ item }}"
+      with_items:
+        - yamllint
+        - ansible-lint
+        - molecule
 
-    # - name: Install packages
-    #   block:
-    #     - name: Install linux tools
-    #       apt:
-    #         name: "{{ item }}"
-    #         state: present
-    #       with_items:
-    #         - ripgrep
-    #         - fzf
+    - name: Install packages
+      block:
+        - name: Install linux tools
+          apt:
+            name: "{{ item }}"
+            state: present
+          with_items:
+            - ripgrep
+            - fzf
 
-    #   become: true
-    #   become_user: root
+      become: true
+      become_user: root
 
   roles:
     - remote
-    # - fonts
-    # - tmux
-    # - i3
-    # - neovim
+    - fonts
+    - tmux
+    - i3
+    - neovim
 
   post_tasks:
     - name: Tmux post config
