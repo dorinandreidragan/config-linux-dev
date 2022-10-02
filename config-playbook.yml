@@ -36,11 +36,16 @@
       become_user: root
 
   roles:
-    - remote
-    - fonts
-    - tmux
-    - i3
-    - neovim
+    - name: remote
+      tags: remote
+    - name: fonts
+      tags: fonts
+    - name: tmux
+      tags: tmux
+    - name: i3
+      tags: i3
+    - name: neovim
+      tags: neovim
 
   post_tasks:
     - name: Tmux post config

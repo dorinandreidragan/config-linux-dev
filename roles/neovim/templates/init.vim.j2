@@ -27,12 +27,15 @@ Plug 'tpope/vim-commentary'
 Plug 'kyazdani42/nvim-web-devicons'
 
 " Github
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'
 
 call plug#end()
 
 " nvim-tree
 lua require('nvim-tree').setup()
+
+" Markdown preview
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 " source custom configuration
 source {{ neovim_config_dir}}/options/sets.vim

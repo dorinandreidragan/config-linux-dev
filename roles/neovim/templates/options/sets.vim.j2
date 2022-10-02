@@ -73,6 +73,10 @@ nnoremap <leader>qw :q!<CR>
 nnoremap <leader>qa :qa!<CR>
 nnoremap <leader>x :x<CR>
 
+" Avoid overwriting the buffer when yank and paste
+" First delete into the blackhole register and then do a normal put before
+vnoremap p "_dP 
+
 " Open Vim configuration file for editing
 nnoremap <leader>2 :e ~/.config/nvim/init.vim<CR>
 

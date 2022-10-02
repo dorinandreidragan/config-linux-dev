@@ -1,6 +1,7 @@
 ---
-xrdp_properties:
-  xserverbpp: 128
-  max_bpp: 128
+xrdp_globals_port: 3390
+xrdp_globals_max_bpp: 128
 
-xrdp_port: 3390
+xrdp_xvnc_xserverbpp: 128
+
+xrdp_sesman_globals_max_sessions: 100

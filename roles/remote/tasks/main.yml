@@ -8,21 +8,37 @@
         state: present
         update_cache: true
 
-    - name: Configure xrdp properties
-      lineinfile:
+    - name: Configure Globals xrdp port
+      community.general.ini_file:
         path: /etc/xrdp/xrdp.ini
-        regexp: "^#?{{ item.key }}=.*"
-        line: "{{ item.key }}={{ item.value }}"
-        create: true
+        section: Globals
+        option: port
+        value: "{{ xrdp_globals_port }}"
         state: present
-      with_dict:
-        - "{{ xrdp_properties }}"
 
-    - name: Configure xrdp port
-      lineinfile:
+    - name: Configure Globals max_bpp
+      community.general.ini_file:
         path: /etc/xrdp/xrdp.ini
-        regexp: "^#?port=3389"
-        line: "port={{ xrdp_port }}"
+        section: Globals
+        option: max_bpp
+        value: "{{ xrdp_globals_max_bpp }}"
+        state: present
+
+    - name: Configure Xvnc xserverbpp
+      community.general.ini_file:
+        path: /etc/xrdp/xrdp.ini
+        section: Xvnc
+        option: xserverbpp
+        value: "{{ xrdp_xvnc_xserverbpp }}"
+        state: present
+
+    - name: Configure Globals MaxSessions
+      community.general.ini_file:
+        path: /etc/xrdp/sesman.ini
+        section: Sessions
+        option: MaxSessions
+        value: "{{ xrdp_sesman_globals_max_sessions }}"
+        state: present
 
     - name: Remove line 'test -x /etc/X11/Xsession && exec /etc/X11/Xsession'
             from /etc/xrdp/startwm.sh
@@ -43,6 +59,12 @@
         path: /etc/xrdp/startwm.sh
         line: "i3"
         state: present
+
+    - name: Add xrdp user to ssl-certs group
+      user:
+        name: xrdp
+        groups: ssl-cert
+        append: yes
 
     - name: Start xrdp service
       sysvinit:
