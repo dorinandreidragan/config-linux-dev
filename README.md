@@ -1,5 +1,22 @@
 # Configure Linux Machine for Dev Workflow
 
+## Overview
+
+This repo contains an ansible playbook that plays the roles needed to configure
+my personal dev workflow.
+
+My dev worfklow is mainly made of the following tools:
+
+* [i3](https://i3wm.org/)
+* [tmux](https://github.com/tmux/tmux/wiki)
+* [neovim](https://neovim.io/)
+
+I'm also using:
+
+* [Hack Nerd Fonts](https://github.com/ryanoasis/nerd-fonts/releases/download/2.2.0-RC/Hack.zip) 
+* [xrdp](http://xrdp.org/) so that I can connect via remote desktop connection to the linux machine
+  and still be able to use `i3`
+
 ## Prerequisites
 
 * Install Ansible
@@ -20,7 +37,7 @@
   sudo iptables -I INPUT -p tcp --dport {xrdp-port} -j ACCEPT
   ```
 
-## Configure
+## Configure Dev Workflow
 
 * Run the ansible playbook to configure your machine for dev workflow
 
