@@ -7,21 +7,21 @@ my personal dev workflow.
 
 My dev worfklow is mainly made of the following tools:
 
-* [i3](https://i3wm.org/)
-* [tmux](https://github.com/tmux/tmux/wiki)
-* [neovim](https://neovim.io/)
+* [i3][i3]
+* [tmux][tmux]
+* [neovim][neovim]
 
 I'm also using:
 
-* [Hack Nerd Fonts](https://github.com/ryanoasis/nerd-fonts/releases/download/2.2.0-RC/Hack.zip) 
-* [xrdp](http://xrdp.org/) so that I can connect via remote desktop connection to the linux machine
-  and still be able to use `i3`
+* [Hack Nerd Fonts][hack nerd fonts]
+* [xrdp][xrdp] so that I can connect via remote desktop connection to the linux machine
+  and still be able to use [i3][i3]
 
 ## Prerequisites
 
 * Install Ansible
 
-  > **Note**: For installation steps see: [Installing Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
+  > **Note**: For installation steps see: [Installing Ansible][installing ansible]
 
 * Install NodeJS
 
@@ -47,3 +47,10 @@ I'm also using:
 
   ansible-playbook config-playbook.yml -e "ansible_sudo_pass=$ansible_password"
   ```
+
+[i3]: https://i3wm.org/
+[tmux]: https://github.com/tmux/tmux/wiki
+[neovim]: https://neovim.io/
+[hack nerd fonts]: https://github.com/ryanoasis/nerd-fonts/releases/download/2.2.0-RC/Hack.zip
+[xrdp]: http://xrdp.org/
+[installing ansible]: https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
