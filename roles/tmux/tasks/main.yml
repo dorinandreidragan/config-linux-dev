@@ -21,7 +21,7 @@
 - name: Install plugins
   git:
     repo: "https://github.com/tmux-plugins/{{ item.name }}.git"
-    dest: "{{ local_user_home }}/.tmux/{{ item.name }}"
+    dest: "{{ local_user_home }}/.tmux/plugins/{{ item.name }}"
     version: "{{ item.version }}"
     force: true
   with_items:

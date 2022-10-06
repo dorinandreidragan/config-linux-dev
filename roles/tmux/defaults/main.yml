@@ -5,4 +5,5 @@ tmux_plugins:
   - { name: tpm, version: v3.0.0 }
   - { name: tmux-sensible, version: v3.0.0 }
   - { name: tmux-resurrect, version: v4.0.0 }
+  - { name: tmux-continuum, version: v3.1.0 }
   - { name: tmux-yank, version: v2.3.0 }
