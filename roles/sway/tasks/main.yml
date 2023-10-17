@@ -10,7 +10,7 @@
 
     - name: Check if /tmp/.X11-unix is mounted as read only
       shell: mount -l | grep /tmp/.X11-unix
-      register: is_x11_unix_mount_ro
+      register: x11_unix_mount
       changed_when: false
       ignore_errors: yes
 
@@ -21,13 +21,31 @@
         fstype: tmpfs # change this to your file system type
         opts: rw
         state: mounted
-      when: "'rw' in is_x11_unix_mount_ro"
+      when: "'ro' in x11_unix_mount.stdout"
 
     - name: Set the stick bit for everything inside /tmp/.X11-unix
       file:
         path: /tmp/.X11-unix
         mode: u=rwx,g=rwx,o=rx,g+t
         recurse: yes
+
+    - name: Set boot_command
+      set_fact:
+        boot_command: "command=mount -o remount,rw /tmp/.X11-unix; chmod +t /tmp/.X11-unix"
+
+    - name: Check if mount command exists
+      shell: "grep -q '{{ boot_command }}' /etc/wsl.conf"
+      register: grep_result
+      changed_when: false
+      ignore_errors: yes
+
+    - name: Insert mount command below [boot]
+      lineinfile:
+        path: /etc/wsl.conf
+        insertafter: "^\\[boot\\]"
+        line: "{{ boot_command }}"
+      when: grep_result.rc != 0
+
   become: true
   become_user: root
   when: is_wsl.rc == 0

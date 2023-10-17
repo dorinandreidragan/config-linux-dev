@@ -1,4 +1,14 @@
 ---
+- name: Install dependencies 
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - unzip
+  become: true
+  become_user: root
+
 - name: Ensure fonts directory
   file:
     path: "{{ local_user_home }}/.fonts"

@@ -1,0 +1,23 @@
+---
+  - name: Configure locale
+    block:
+    - name: Add desired locale to /etc/locale.gen
+      lineinfile:
+        path: /etc/locale.gen
+        line: "{{ item }}"
+      with_items:
+        - en_US.UTF-8 UTF-8
+
+    - name: Generate necessary locales
+      command: locale-gen
+
+    - name: Append locales to ~/.profile
+      ansible.builtin.blockinfile:
+        path: "{{ local_user_home }}/.profile"
+        block: |
+          # set locale
+          export LC_CTYPE=en_US.utf8
+          export LC_ALL=en_US.utf8
+          export LANG=en_US.utf8
+    become: true
+    become_user: root

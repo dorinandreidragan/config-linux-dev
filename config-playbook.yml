@@ -14,14 +14,6 @@
         create: true
         mode: u+rw
 
-    - name: Install Ansible tools with pip
-      pip:
-        name: "{{ item }}"
-      with_items:
-        - yamllint
-        - ansible-lint
-        - molecule
-
     - name: Install packages
       block:
         - name: Install linux tools
@@ -32,11 +24,23 @@
           with_items:
             - ripgrep
             - fzf
+            - unzip
+            - pip
 
       become: true
       become_user: root
 
+    - name: Install Ansible tools with pip
+      pip:
+        name: "{{ item }}"
+      with_items:
+        - yamllint
+        - ansible-lint
+        - molecule
+
   roles:
+    - name: locale
+      tags: locale
     - name: remote
       tags: remote
     - name: fonts
