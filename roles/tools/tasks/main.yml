@@ -1,0 +1,44 @@
+---
+- name: Install microsoft-edge
+  block:
+  - name: Import Microsoft GPG key
+    apt_key:
+      url: https://packages.microsoft.com/keys/microsoft.asc
+      state: present
+  - name: Add MS Edge repository
+    apt_repository:
+      repo: deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main
+      state: present
+  - name: Update apt cache
+    apt:
+      update_cache: yes
+  - name: Install microsoft-edge-dev
+    apt:
+      name: microsoft-edge-dev
+      state: present
+
+  become: true
+  become_user: root
+  tags: ms-edge
+
+- name: Install vscode
+  block:
+  - name: Import Microsoft GPG key
+    apt_key:
+      url: https://packages.microsoft.com/keys/microsoft.asc
+      state: present
+  - name: Add VS Code repository
+    apt_repository:
+      repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+      state: present
+  - name: Update apt cache
+    apt:
+      update_cache: yes
+  - name: Install code package
+    apt:
+      name: code
+      state: present
+
+  become: true
+  become_user: root
+  tags: vscode

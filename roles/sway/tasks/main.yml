@@ -1,0 +1,64 @@
+---
+- name: Check if running under WSL
+  shell: grep -i microsoft-standard-WSL /proc/version
+  register: is_wsl
+  changed_when: false
+  ignore_errors: yes
+
+- name: Set the sticky bit for /tmp/.X11-unix
+  block:
+
+    - name: Check if /tmp/.X11-unix is mounted as read only
+      shell: mount -l | grep /tmp/.X11-unix
+      register: is_x11_unix_mount_ro
+      changed_when: false
+      ignore_errors: yes
+
+    - name: Mount the /tmp/.X11-unix directory as read write
+      mount:
+        path: /tmp/.X11-unix
+        src: none # change this line
+        fstype: tmpfs # change this to your file system type
+        opts: rw
+        state: mounted
+      when: "'rw' in is_x11_unix_mount_ro"
+
+    - name: Set the stick bit for everything inside /tmp/.X11-unix
+      file:
+        path: /tmp/.X11-unix
+        mode: u=rwx,g=rwx,o=rx,g+t
+        recurse: yes
+  become: true
+  become_user: root
+  when: is_wsl.rc == 0
+
+- name: Install packages
+  block:
+  - name: Install tools for sway
+    apt:
+      name: "{{ packages }}"
+      state: present
+    vars:
+      packages:
+        - foot
+        - rofi
+        - xwayland
+
+  - name: Install sway
+    apt:
+      name: sway
+      state: present
+
+  become: true
+  become_user: root
+
+- name: Make sure "{{ local_user_home }}/.config/sway" exists
+  file:
+    path: "{{ local_user_home }}/.config/sway"
+    state: directory
+
+- name: Configure sway
+  template:
+    src: templates/config.j2
+    dest: "{{ local_user_home }}/.config/sway/config"
+    mode: u+rw

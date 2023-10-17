@@ -45,8 +45,12 @@
       tags: tmux
     - name: i3
       tags: i3
+    - name: sway
+      tags: sway
     - name: neovim
       tags: neovim
+    - name: tools
+      tags: tools
 
   post_tasks:
     - name: Tmux post config
