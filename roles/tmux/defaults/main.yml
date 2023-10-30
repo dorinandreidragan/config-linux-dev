@@ -2,8 +2,9 @@
 local_user_home: "{{ lookup('env', 'HOME') }}"
 
 tmux_plugins:
-  - { name: tpm, version: v3.0.0 }
-  - { name: tmux-sensible, version: v3.0.0 }
-  - { name: tmux-resurrect, version: v4.0.0 }
-  - { name: tmux-continuum, version: v3.1.0 }
-  - { name: tmux-yank, version: v2.3.0 }
+  - { name: tpm, repo_name: tmux-plugins/tpm, version: v3.0.0 }
+  - { name: tmux-sensible, repo_name: tmux-plugins/tmux-sensible, version: v3.0.0 }
+  - { name: tmux-resurrect, repo_name: tmux-plugins/tmux-resurrect, version: v4.0.0 }
+  - { name: tmux-continuum, repo_name: tmux-plugins/tmux-continuum, version: v3.1.0 }
+  - { name: tmux-yank, repo_name: tmux-plugins/tmux-yank, version: v2.3.0 }
+  - { name: nordtheme, repo_name: nordtheme/tmux, version: v0.3.0 }

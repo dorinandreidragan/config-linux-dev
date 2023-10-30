@@ -20,7 +20,7 @@
 
 - name: Install plugins
   git:
-    repo: "https://github.com/tmux-plugins/{{ item.name }}.git"
+    repo: "https://github.com/{{ item.repo_name }}.git"
     dest: "{{ local_user_home }}/.tmux/plugins/{{ item.name }}"
     version: "{{ item.version }}"
     force: true
