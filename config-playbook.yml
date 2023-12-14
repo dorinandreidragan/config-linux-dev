@@ -1,9 +1,11 @@
 ---
 - hosts: localhost
-  gather_facts: true
+  gather_facts: false
   vars:
-    - shell_profile: .zshrc
-    - local_user_home: "{{ lookup('env', 'HOME') }}"
+    shell_profile: .zshrc
+    local_user_home: "{{ lookup('env', 'HOME') }}"
+    ansible_user: "{{ lookup('env', 'ansible_user') }}"
+    ansible_sudo_pass: "{{ lookup('env', 'ansible_password') }}"
 
   pre_tasks:
     - name: Make sure 'PATH=$PATH:/home/$USER/.local/bin'
