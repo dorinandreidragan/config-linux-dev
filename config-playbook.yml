@@ -1,6 +1,6 @@
 ---
 - hosts: localhost
-  gather_facts: false
+  gather_facts: true
   vars:
     shell_profile: .zshrc
     local_user_home: "{{ lookup('env', 'HOME') }}"
