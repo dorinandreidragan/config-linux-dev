@@ -2,3 +2,4 @@
 local_user_home: "{{ lookup('env', 'HOME') }}"
 font_archives:
  - https://github.com/ryanoasis/nerd-fonts/releases/download/2.2.0-RC/Hack.zip
+ - https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/FiraCode.zip
