@@ -1,6 +1,4 @@
 ---
-
-# Install python dependencies
 - name: Install dependencies
   block:
 
@@ -25,7 +23,6 @@
   tags:
     - install
 
-# Install neovim
 - name: Install neovim
   block:
 
@@ -63,68 +60,16 @@
 
     - name: Copy neovim config
       copy:
-        src: ./files/nvim
+        src: ./files/nvim/
         dest: "{{ neovim_config_dir }}"
         mode: u+rw
   tags:
+    - install
     - config
 
-# Install vim-plug
-# - name: Install vim-plug
-#   block:
-#     - name: Create "{{ neovim_config_dir }}/autoload" directory
-#       file:
-#         path: "{{ neovim_config_dir }}/autoload"
-#         state: directory
-#         mode: u+rw
-#
-#     - name: Install vim-plug
-#       get_url:
-#         url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-#         dest: "{{ neovim_config_dir }}/autoload/plug.vim"
-#         force: true
-#         mode: u+rw
-#
-#   tags:
-#     - config
-#
-# - name: Configure neovim
-#   block:
-#     - name: Ensure that "{{ neovim_config_dir }}/options" exists
-#       file:
-#         path: "{{ neovim_config_dir }}/options"
-#         state: directory
-#         mode: u+rw
-#
-#     - name: Copy init.vim
-#       template:
-#         src: init.vim.j2
-#         dest: "{{ neovim_config_dir }}/init.vim"
-#         mode: u+rw
-#
-#     - name: Apply options/*.vim
-#       template:
-#         src: "./options/{{ item }}.j2"
-#         dest: "{{ neovim_config_dir }}/options/{{ item }}"
-#         mode: u+rw
-#       with_items:
-#         - sets.vim
-#         - theme.vim
-#         - nvim-tree.vim
-#         - lualine.vim
-#         - telescope.vim
-#
-#   tags:
-#     - config
-#
-# - name: Install vim-plugins
-#   block:
-#     - name: Install vim plugins
-#       command: "nvim -E -s -u {{ neovim_config_dir }}/init.vim +PlugInstall +qall"
-#       changed_when: false
-#
-#   tags:
-#     - bootstrap
-#     - config
-#     - update
-#     - plugins
+- name: Install packer plugin for Neovim
+  git:
+    repo: https://github.com/wbthomason/packer.nvim
+    dest: "{{ neovim_config_dir }}/packer.nvim"
+    force: yes
+
