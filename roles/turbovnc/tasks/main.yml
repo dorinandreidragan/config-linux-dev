@@ -1,0 +1,35 @@
+- name: Install and configure turbovnc
+  block:
+    - name: Download TurboVNC GPG key
+      get_url:
+        url: https://packagecloud.io/dcommander/turbovnc/gpgkey
+        dest: /tmp/TurboVNC.gpgkey
+
+    - name: Import TurboVNC GPG key
+      shell: gpg --dearmor </tmp/TurboVNC.gpgkey >/etc/apt/trusted.gpg.d/TurboVNC.gpg
+      args:
+        warn: no
+
+    - name: Download TurboVNC.list
+      get_url:
+        url: https://raw.githubusercontent.com/TurboVNC/repo/main/TurboVNC.list
+        dest: /etc/apt/sources.list.d/TurboVNC.list
+
+    - name: Update APT package cache
+      apt:
+        update_cache: yes
+
+    - name: Install TurboVNC
+      apt:
+        name: turbovnc
+        state: present
+
+    - name: Add /opt/TurboVNC/bin to user's profile
+      lineinfile:
+        path: "{{ local_user_home }}/{{ shell_profile }}"
+        line: "export PATH=$PATH:/opt/TurboVNC/bin"
+        create: true
+        mode: u+rw
+
+  become: true
+  become_user: root

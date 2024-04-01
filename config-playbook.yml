@@ -45,6 +45,8 @@
       tags: locale
     - name: remote
       tags: remote
+    - name: turbovnc
+      tags: vnc
     - name: fonts
       tags: fonts
     - name: tmux
@@ -57,6 +59,7 @@
       tags: neovim
     - name: tools
       tags: tools
+
 
   post_tasks:
     - name: Tmux post config
