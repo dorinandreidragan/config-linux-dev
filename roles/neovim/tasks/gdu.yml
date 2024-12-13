@@ -1,0 +1,30 @@
+---
+- name: Install LazyGit
+  block:
+
+    - name: Ensure curl and tar are installed
+      apt:
+        name:
+          - curl
+          - tar
+        state: present
+
+    - name: Download and extract gdu
+      shell: |
+        curl -L https://github.com/dundee/gdu/releases/latest/download/gdu_linux_amd64.tgz | tar xz
+      args:
+        chdir: /tmp
+
+    - name: Make gdu executable
+      file:
+        path: /tmp/gdu_linux_amd64
+        mode: '0755'
+        state: file
+
+    - name: Move gdu to /usr/bin
+      command: mv /tmp/gdu_linux_amd64 /usr/bin/gdu
+
+  become: true
+  become_user: root
+  tags:
+    - gdu

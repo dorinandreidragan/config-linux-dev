@@ -59,8 +59,8 @@
       tags: neovim
     - name: tools
       tags: tools
+    - name: pulse-secure
+      tags: pulse-secure
+    - name: zsh
+      tags: zsh
 
-
-  post_tasks:
-    - name: Tmux post config
-      import_tasks: tmux-config.yml

@@ -1,8 +1,6 @@
 ---
 
-# The specific package name used to install neovim
-neovim_name: neovim
-neovim_ppa: ppa:neovim-ppa/unstable
+node_version: 20
 
 # The base directory relative to which user specific configuration files should be stored
 config_dir: "{{ ansible_env.XDG_CONFIG_HOME | default(default_xdg_config_home) }}"
@@ -15,5 +13,8 @@ python_required_packages:
 
 neovim_required_packages:
   - ripgrep
+  - lua5.1
+  - luarocks
+  - neovim
 
 pip3_name: pip3

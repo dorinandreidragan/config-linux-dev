@@ -1,0 +1,17 @@
+---
+- name: Install xsel and xclip
+  block:
+    - name: Ensure xsel is installed
+      apt:
+        name: xsel
+        state: present
+
+    - name: Ensure xclip is installed
+      apt:
+        name: xclip
+        state: present
+
+  become: true
+  become_user: root
+  tags:
+    - clipboard

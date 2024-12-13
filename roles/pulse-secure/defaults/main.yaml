@@ -1,0 +1,7 @@
+---
+pulse_version: "22.7r4-b30859"
+pulse_filename: "ps-pulse-linux-{{ pulse_version }}-64bit-installer.deb"
+pulse_deb_urls:
+  - http://security.ubuntu.com/ubuntu/pool/main/w/webkit2gtk/libjavascriptcoregtk-4.0-18_2.46.4-0ubuntu0.22.04.1_amd64.deb
+  - http://mirrors.kernel.org/ubuntu/pool/main/i/icu/libicu70_70.1-2_amd64.deb
+  - http://security.ubuntu.com/ubuntu/pool/main/w/webkit2gtk/libwebkit2gtk-4.0-37_2.46.4-0ubuntu0.22.04.1_amd64.deb

@@ -1,0 +1,33 @@
+---
+- name: Install Zsh
+  apt:
+    name: zsh
+    state: present
+  become: true
+
+- name: Change default shell to zsh 
+  shell: chsh -s $(which zsh) "{{ ansible_env.USER }}"
+  become: true
+
+- name: Run Oh My Zsh install script
+  shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  args:
+    executable: /bin/bash
+
+- name: Install zsh-autosuggestions plugin
+  git:
+    repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
+    dest: '{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions'
+
+- name: Install zsh-syntax-highlighting plugin
+  git:
+    repo: 'https://github.com/zsh-users/zsh-syntax-highlighting.git'
+    dest: '{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting'
+
+- name: Configure .zshrc
+  lineinfile:
+    path: '{{ ansible_env.HOME }}/.zshrc'
+    regexp: '^(plugins=)'
+    line: 'plugins=(git zsh-autosuggestions zsh-syntax-highlighting)'
+    state: present
+

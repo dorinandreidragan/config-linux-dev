@@ -1,0 +1,23 @@
+---
+- name: Install bottom
+  block:
+
+    - name: Ensure curl is installed
+      apt:
+        name: curl
+        state: present
+
+    - name: Download bottom for x86-64
+      when: ansible_architecture == "x86_64"
+      get_url:
+        url: https://github.com/ClementTsang/bottom/releases/download/0.10.2/bottom_0.10.2-1_amd64.deb
+        dest: /tmp/bottom_0.10.2-1_amd64.deb
+
+    - name: Install bottom for x86-64
+      when: ansible_architecture == "x86_64"
+      command: sudo dpkg -i /tmp/bottom_0.10.2-1_amd64.deb
+
+  become: true
+  become_user: root
+  tags:
+    - bottom

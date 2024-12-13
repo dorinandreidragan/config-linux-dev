@@ -1,0 +1,40 @@
+---
+- name: Install LazyGit
+  block:
+    - name: Ensure dependencies are installed
+      apt:
+        name:
+          - curl
+          - tar
+        state: present
+
+    - name: Get LazyGit latest version
+      shell: |
+        curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" |
+        grep -Po '"tag_name": *"v\K[^"]*' > /tmp/lazygit_version
+      register: lazygit_version
+
+    - name: Set LazyGit version variable
+      set_fact:
+        lazygit_version: "{{ lookup('file', '/tmp/lazygit_version') }}"
+
+    - name: Download LazyGit tarball
+      get_url:
+        url: "https://github.com/jesseduffield/lazygit/releases/download/v{{ lazygit_version }}/lazygit_{{ lazygit_version }}_Linux_x86_64.tar.gz"
+        dest: /tmp/lazygit.tar.gz
+
+    - name: Extract LazyGit
+      unarchive:
+        src: /tmp/lazygit.tar.gz
+        dest: /tmp/
+        remote_src: true
+
+    - name: Install LazyGit
+      command: sudo install /tmp/lazygit -D -t /usr/local/bin/
+
+  become: true
+  become_user: root
+  tags:
+    - lazygit
+
+
