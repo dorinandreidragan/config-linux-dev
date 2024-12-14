@@ -1,0 +1,17 @@
+---
+- name: Install AstroNvim
+  block:
+
+    - name: Clone AstroNvim repository
+      git:
+        repo: https://github.com/AstroNvim/template
+        dest: ~/.config/nvim
+        depth: 1
+
+    - name: Remove template's git connection
+      file:
+        path: ~/.config/nvim/.git
+        state: absent
+
+  tags:
+    - astro

@@ -1,0 +1,24 @@
+---
+- name: Install dependencies
+  block:
+
+  - name: Install python dependencies
+    apt:
+      name: "{{ item }}"
+      update_cache: true
+      state: present
+    with_items:
+      - "{{ python_required_packages }}"
+
+  - name: Install neovim required dependencies
+    apt:
+      name: "{{ item }}"
+      update_cache: true
+      state: present
+    with_items:
+      - "{{ neovim_required_packages }}"
+
+  become: true
+  become_user: root
+  tags:
+    - nvim-deps
