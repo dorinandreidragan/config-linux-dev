@@ -1,0 +1,17 @@
+---
+vscode_extensions:
+  # General
+  - vscodevim.vim
+  - ms-vscode-remote.vscode-remote-extensionpack
+  - equinusocio.vsc-material-theme-icons
+  # Git
+  - eamodio.gitlens
+  - mhutchie.git-graph
+  # Diagrams
+  - hediet.vscode-drawio
+  - bierner.markdown-mermaid
+  # AI
+  - GitHub.copilot
+  # Markdown
+  - yzhang.markdown-all-in-one
+  - shd101wyy.markdown-preview-enhanced

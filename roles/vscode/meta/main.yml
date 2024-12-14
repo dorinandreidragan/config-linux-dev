@@ -1,0 +1,10 @@
+
+---
+galaxy_info:
+  author: Dorin Andrei Dragan
+  description: Install and configure Visual Studio Code with essential extensions
+  company: dorinandreidragan
+  license: MIT
+  min_ansible_version: 2.9
+
+dependencies: []

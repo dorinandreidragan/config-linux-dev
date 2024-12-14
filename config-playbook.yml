@@ -57,8 +57,11 @@
       tags: sway
     - name: neovim
       tags: neovim
-    - name: tools
-      tags: tools
+    # - name: tools
+    #   tags: tools
+    # TOOLS
+    - name: vscode
+      tags: vscode
     - name: pulse-secure
       tags: pulse-secure
     - name: zsh

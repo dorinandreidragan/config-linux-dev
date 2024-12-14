@@ -1,0 +1,27 @@
+---
+- name: Add Microsoft GPG key
+  become: true
+  apt_key:
+    url: https://packages.microsoft.com/keys/microsoft.asc
+    state: present
+
+- name: Add Visual Studio Code repository
+  become: true
+  apt_repository:
+    repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+    state: present
+
+- name: Update apt cache
+  become: true
+  apt:
+    update_cache: yes
+
+- name: Install Visual Studio Code
+  become: true
+  apt:
+    name: code
+    state: present
+
+- name: Install VSCode extensions
+  shell: code --install-extension {{ item }}
+  with_items: "{{ vscode_extensions }}"
